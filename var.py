@@ -1,4 +1,4 @@
-CELL_SIZE = 50
+CELL_SIZE = 25
 ROW = 0
 COL = 0
 MINES = 0
