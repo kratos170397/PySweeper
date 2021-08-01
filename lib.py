@@ -41,7 +41,7 @@ def loadImgs():
     files = listdir(var.PATH)
     for f in files:
         tmpImg = pygame.image.load(f"{var.PATH}{f}")
-        tmpImg = pygame.transform.scale(tmpImg, (50, 50))
+        tmpImg = pygame.transform.scale(tmpImg, (var.CELL_SIZE, var.CELL_SIZE))
         var.gameImgs[f[0]] = tmpImg
 
 
@@ -88,7 +88,7 @@ def setCellVal(pos):
 
 def getClickedPos(pos):
     x, y = pos
-    return (y//50, x//50)
+    return (y//var.CELL_SIZE, x//var.CELL_SIZE)
 
 
 def updateUserDisplay(game, pos, updateAll=False):
