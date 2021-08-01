@@ -1,5 +1,7 @@
 from os import terminal_size
 import sys
+
+from pygame.constants import GL_ACCUM_RED_SIZE
 import lib
 import pygame
 
@@ -13,6 +15,8 @@ lib.loadImgs()
 lib.displayInit(game)
 lib.gameInit()
 
+for row in var.gameData:
+    print(row)
 
 pygame.display.update()
 

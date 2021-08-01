@@ -109,15 +109,17 @@ def revealCell(game, pos, checkedCells, isDone=True):
     zeroCells = []
     var.userData[y][x] = var.gameData[y][x]
 
-    checkedCells.append((y, x))
+    if (y, x) not in checkedCells:
+        checkedCells.append((y, x))
     if var.gameData[y][x] == '0':
         for tmp_y in range(y-1, y+2):
             for tmp_x in range(x-1, x+2):
-                if tmp_y in range(var.ROW) and tmp_x in range(var.COL) and (tmp_y, tmp_x) not in checkedCells:
+                if tmp_y in range(var.ROW) and tmp_x in range(var.COL) and (tmp_y, tmp_x) not in checkedCells and (tmp_y, tmp_x) != (y, x):
                     var.userData[tmp_y][tmp_x] = var.gameData[tmp_y][tmp_x]
                     if var.gameData[tmp_y][tmp_x] == '0':
                         zeroCells.append((tmp_y, tmp_x))
                         isDone = False
+                    checkedCells.append((tmp_y, tmp_x))
     else:
         isDone = True
 
