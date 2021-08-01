@@ -27,7 +27,8 @@ def getUserLevel():
                 else:
                     pass
             print("\n"*100)
-            print(f"LAYOUT = {var.ROW}x{var.COL}\nNumber of mines: {var.MINES}")
+            print(
+                f"LAYOUT = {var.ROW}x{var.COL}\nNumber of mines: {var.MINES}")
             var.gameData = [[' ' for _ in range(var.COL)]
                             for _ in range(var.ROW)]
             var.userData = [['d' for _ in range(var.COL)]
@@ -133,7 +134,8 @@ def revealCell(game, pos, checkedCells, isDone=True):
 def checkGameResult():
     retVal = True
     for i in range(var.ROW):
-        userResult = ''.join(var.userData[i]).replace('f', 'b').replace('d', 'b')
+        userResult = ''.join(var.userData[i]).replace(
+            'f', 'b').replace('d', 'b')
         gameResult = ''.join(var.gameData[i])
         if userResult != gameResult:
             retVal = False

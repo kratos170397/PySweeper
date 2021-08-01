@@ -15,8 +15,6 @@ lib.loadImgs()
 lib.displayInit(game)
 lib.gameInit()
 
-for row in var.gameData:
-    print(row)
 
 pygame.display.update()
 
