@@ -10,7 +10,7 @@ There are 3 level:
 
 Playing:
  - Use left mouse to reveal 1 cell
- - Use middle mouse on opened cell to quick reveal all other cells around (with suitable bomb flagged)
+ - Use middle mouse on opened cell to quick reveal all other cells around (with suitable number of bomb flagged)
  - Use right mouse to flag a bomb
 
 ![2021-08-04_08h18_05](https://user-images.githubusercontent.com/78654854/128106906-e5ef279f-0e56-4700-9bc9-755c6810b003.png)
