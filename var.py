@@ -9,3 +9,4 @@ gameImgs = {}
 gameData = []
 userData = []
 minePos = []
+retry = True
