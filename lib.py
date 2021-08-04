@@ -7,35 +7,45 @@ import var
 pygame.init()
 
 
-def getUserLevel():
+def getUserLevel(option=None):
+    userSelection = 0
     while True:
         try:
-            userSelection = int(input(
-                "\n"*100+"Please select difficulty:\n1. Beginner\n2. Intermediate\n3. Expert\n4. Exit\n---> "))
-            if userSelection == 4:
-                var.running = False
+            if option is not None:
+                userSelection = option
             else:
-                if userSelection == 1:
-                    var.ROW, var.COL = 8, 8
-                    var.MINES = 10
-                elif userSelection == 2:
-                    var.ROW, var.COL = 16, 16
-                    var.MINES = 40
-                elif userSelection == 3:
-                    var.ROW, var.COL = 16, 30
-                    var.MINES = 99
-                else:
-                    pass
-            print("\n"*100)
-            print(
-                f"LAYOUT = {var.ROW}x{var.COL}\nNumber of mines: {var.MINES}")
-            var.gameData = [[' ' for _ in range(var.COL)]
-                            for _ in range(var.ROW)]
-            var.userData = [['d' for _ in range(var.COL)]
-                            for _ in range(var.ROW)]
+                userSelection = int(input(
+                    "\n"*100+"Please select difficulty:\n1. Beginner\n2. Intermediate\n3. Expert\n4. Exit\n---> "))
             break
         except ValueError:
             print("Wrong input, try again!!!\n\n")
+
+    if userSelection == 4:
+        var.retry = False
+        var.running = False
+    else:
+        var.ROW, var.COL, var.MINES = 0, 0, 0
+        var.userData, var.gameData = [], []
+        var.minePos = []
+        
+        if userSelection == 1:
+            var.ROW, var.COL = 8, 8
+            var.MINES = 10
+        elif userSelection == 2:
+            var.ROW, var.COL = 16, 16
+            var.MINES = 40
+        elif userSelection == 3:
+            var.ROW, var.COL = 16, 30
+            var.MINES = 99
+        else:
+            pass
+    print("\n"*100)
+    print(
+        f"LAYOUT = {var.ROW}x{var.COL}\nNumber of mines: {var.MINES}")
+    var.gameData = [[' ' for _ in range(var.COL)]
+                    for _ in range(var.ROW)]
+    var.userData = [['d' for _ in range(var.COL)]
+                    for _ in range(var.ROW)]
 
 
 def loadImgs():

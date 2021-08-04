@@ -1,20 +1,21 @@
-from os import terminal_size
 import sys
-
-from pygame.constants import GL_ACCUM_RED_SIZE
-import lib
 import pygame
-
 import var
+import lib
+import tkinter as tk
+
+from tkinter import simpledialog, messagebox
+
+root = tk.Tk()
+root.withdraw()
 
 var.running = True
 
-lib.getUserLevel()
+lib.getUserLevel(simpledialog.askinteger("Input", "Please select difficulty:\n1. Beginner\n2. Intermediate\n3. Expert\n4. Exit"))
 game = pygame.display.set_mode((var.COL*var.CELL_SIZE, var.ROW*var.CELL_SIZE))
 lib.loadImgs()
 lib.displayInit(game)
 lib.gameInit()
-
 
 pygame.display.update()
 
@@ -36,12 +37,14 @@ while var.running:
 
                     if var.gameData[y][x] == 'b':
                         var.running = False
+                        var.retry = messagebox.askyesno("OOPS!!", "YOU STEPPED ON A MINE!!! Wanna try again?")
                         print('You lose')
                     else:
                         lib.revealCell(game, cellClickedPos, [])
                     if lib.checkGameResult() is True:
-                        print('You won')
                         var.running = False
+                        var.retry = messagebox.askyesno("CONGRATS!!", "YOU WON!!! Wanna try again?")
+                        print('You won')
                         sys.exit()
 
                 if mouseClicked == 1 and var.userData[y][x] != 'd' and var.userData[y][x] != 'f':
@@ -61,11 +64,13 @@ while var.running:
                                             game, (tmp_y, tmp_x), [])
                                         if var.gameData[tmp_y][tmp_x] == 'b':
                                             var.running = False
+                                            var.retry = messagebox.askyesno("OOPS!!", "YOU STEPPED ON A MINE!!! Wanna try again?")
                                             print('You lose')
                         if lib.checkGameResult() is True:
-                            print('You won')
                             var.running = False
-                            sys.exit()
+                            var.retry = messagebox.askyesno("CONGRATS!!", "YOU WON!!! Wanna try again?")
+                            print('You won')
+                            
 
                 if mouseClicked == 2 and (var.userData[y][x] == 'd' or var.userData[y][x] == 'f'):
                     if var.userData[y][x] == 'f':
@@ -76,3 +81,15 @@ while var.running:
                         pass
 
                     lib.updateUserDisplay(game, cellClickedPos)
+    if var.retry is True and var.running is False:
+        lib.getUserLevel(simpledialog.askinteger("Input", "Please select difficulty:\n1. Beginner\n2. Intermediate\n3. Expert\n4. Exit"))
+        if var.retry is False and var.running is False:
+            break
+        else:
+            game = pygame.display.set_mode((var.COL*var.CELL_SIZE, var.ROW*var.CELL_SIZE))
+            lib.loadImgs()
+            lib.displayInit(game)
+            lib.gameInit()
+            var.running = True
+    else:
+        pass
